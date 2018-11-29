@@ -1,28 +1,63 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { App, View, Page, Navbar, Toolbar, Link } from "framework7-react";
 
-class App extends Component {
+const home = () => (
+  <Page name="home">
+    <Navbar title="Home Page" />
+    ...
+    <Link href="/about/">About Page</Link>
+    <Link href="/login/">Login Page</Link>
+  </Page>
+);
+
+const about = () => (
+  <Page name="about">
+    <Navbar title="About" backLink="Back" />
+    {/* Page content */}
+    ...
+  </Page>
+);
+
+const login = () => (
+  <Page name="login">
+    <Navbar title="Login" backLink="Back" />
+    {/* Page content */}
+    ...
+  </Page>
+);
+
+const f7params = {
+  name: "My App",
+  id: "com.myapp.test",
+  panel: {
+    swipe: "left",
+  },
+  theme: "ios",
+  routes: [
+    {
+      path: "/",
+      component: home,
+    },
+    {
+      path: "/about/",
+      component: about,
+    },
+    {
+      path: "/login/",
+      component: login,
+    },
+  ],
+};
+
+class AppT extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <App params={f7params}>
+        {/* Current View/Router, initial page will be loaded from home.jsx component */}
+        <View main url="/" />
+      </App>
     );
   }
 }
 
-export default App;
+export default AppT;
